@@ -155,3 +155,22 @@ export const destroyCard = async (id) => {
     }
 };
 /** END Cards **/
+
+// createCollection({
+    //   name: name,
+    // }).then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    // indexCollection().then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    // showCollection(1).then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    //destroyCollection(9).then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    //updateCard(1, {"name":"Card 2"}).then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    // createCard({
+    //   name: name,
+    //   collectionID: 11,
+    // }).then((res) => { console.log(res) }).catch((err) => console.log(err));
+
+    //indexCard(11).then((res) => { console.log(res) }).catch((err) => console.log(err));
