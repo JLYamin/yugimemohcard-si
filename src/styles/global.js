@@ -16,5 +16,12 @@ export const GlobalStyle = createGlobalStyle`
     a {
       text-decoration: none;
     }
+
+    h1 {
+      color: #444345;
+      font-family: "Noto Serif", serif;
+      font-weight: 400;
+      font-size: 1.75rem;
+    }
   }
 `;
