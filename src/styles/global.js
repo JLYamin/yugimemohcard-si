@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
       color: #444345;
       font-family: "Noto Serif", serif;
       font-weight: 400;
+      font-size: 1.75rem;
     }
   }
 `;

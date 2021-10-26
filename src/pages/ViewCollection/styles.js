@@ -1,4 +1,4 @@
-import { darken, desaturate } from "polished";
+import { lighten } from "polished";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,29 +14,36 @@ export const Container = styled.section`
   }
 `;
 
+export const Back = styled(Link)`
+  display: grid;
+  grid-template-columns: repeat(2, min-content);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem;
+
+  width: min-content;
+
+  color: #382268;
+  cursor: pointer;
+`;
+
 export const Head = styled.div`
   display: grid;
   grid-template-columns: 1fr min-content;
-  align-items: end;
+  grid-template-rows: repeat(2, min-content);
+  align-items: center;
+  gap: 0.5rem;
   padding: 0 1rem 1rem;
 
   border-bottom: 1px solid #c4c4c4;
-`;
 
-export const SearchInput = styled.div`
-  display: grid;
-  grid-template-columns: min-content min-content;
+  h1 {
+    grid-column: 1 / 3;
+  }
 
-  input {
-    width: 15rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 2rem;
-    border: 2px solid #846db4;
-    box-shadow: 0px 5px 15px rgba(147, 158, 175, 0.26);
-
-    &:focus {
-      outline: none;
-    }
+  p {
+    font-weight: 300;
+    color: #382268;
   }
 `;
 
@@ -67,7 +74,7 @@ export const ReviewButton = styled.div`
   }
 `;
 
-export const CollectionsContainer = styled.div`
+export const CardsContainer = styled.div`
   padding: 0 1rem 1rem;
 
   display: grid;
@@ -75,7 +82,7 @@ export const CollectionsContainer = styled.div`
   gap: 3rem;
 `;
 
-export const NewCollection = styled(Link)`
+export const NewCard = styled(Link)`
   display: grid;
   grid-template-rows: repeat(2, min-content);
   gap: 0.5rem;
@@ -107,15 +114,23 @@ export const NewCollection = styled(Link)`
   }
 `;
 
-export const Collection = styled(Link)`
+export const Card = styled.div`
   display: grid;
   grid-template-rows: repeat(3, min-content);
+  grid-template-columns: min-content min-content;
+  gap: 0 0.75rem;
   align-items: center;
   justify-items: center;
 
-  position: relative;
-
   cursor: pointer;
+
+  div {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    text-align: center;
+  }
 
   .front {
     width: 7.25rem;
@@ -129,9 +144,6 @@ export const Collection = styled(Link)`
     align-items: center;
     justify-content: center;
 
-    position: relative;
-    left: -0.5rem;
-
     z-index: 1;
 
     svg {
@@ -142,27 +154,23 @@ export const Collection = styled(Link)`
   }
 
   .back {
-    position: absolute;
     width: 7.25rem;
     height: 9.5rem;
-    top: 0;
-    left: 0.75rem;
+
     border-radius: 0.5rem;
 
-    background-color: ${({ color }) => darken(0.05, desaturate(0.5, color))};
+    background-color: ${({ color }) => lighten(0.05, color)};
 
     border: 2px solid #777085;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.26);
   }
+`;
 
-  p {
-    color: #382268;
-    margin-top: 0.5rem;
-  }
+export const EditButton = styled(Link)`
+  display: grid;
+  grid-template-columns: min-content min-content;
+  white-space: nowrap;
+  gap: 0.25rem;
 
-  span {
-    color: #513b81;
-    font-size: 0.95rem;
-    font-weight: 300;
-  }
+  color: #382268;
 `;
