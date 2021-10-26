@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { darken, desaturate } from "polished";
+import { lighten } from "polished";
 
 export const Container = styled.div`
   padding: 1.5rem 2.5rem;
@@ -115,9 +115,23 @@ export const Button = styled.button`
   }
 `;
 
-export const Collection = styled.div`
+export const Card = styled.div`
   display: grid;
-  position: relative;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-columns: min-content min-content;
+  gap: 0.25rem 0.75rem;
+  align-items: center;
+  justify-items: center;
+
+  cursor: pointer;
+
+  div {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    text-align: center;
+  }
 
   .front {
     width: calc(7.25rem * 1.25);
@@ -131,9 +145,6 @@ export const Collection = styled.div`
     align-items: center;
     justify-content: center;
 
-    position: relative;
-    left: calc(-0.35rem * 1.25);
-
     z-index: 1;
 
     svg {
@@ -144,22 +155,14 @@ export const Collection = styled.div`
   }
 
   .back {
-    position: absolute;
     width: calc(7.25rem * 1.25);
     height: calc(9.5rem * 1.25);
-    top: 0;
-    left: calc(0.75rem * 1.25);
+
     border-radius: 0.5rem;
 
-    background-color: ${({ color }) => darken(0.05, desaturate(0.5, color))};
+    background-color: ${({ color }) => lighten(0.05, color)};
 
     border: 2px solid #777085;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.26);
   }
-`;
-
-export const EmojiPicker = styled.div`
-  margin-top: 0.25rem;
-  display: grid;
-  gap: 0.25rem;
 `;

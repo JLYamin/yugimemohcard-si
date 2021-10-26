@@ -14,6 +14,7 @@ import {
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Twemoji from "react-twemoji";
 import Select from "react-select";
+import { useHistory } from "react-router-dom";
 
 function NewCollection({}) {
   const [nomeColecao, setNomeColecao] = useState("");
@@ -56,9 +57,11 @@ function NewCollection({}) {
     { label: "😁", value: "😁" },
   ];
 
+  const history = useHistory();
+
   return (
     <Container>
-      <Back to="/collections">
+      <Back onClick={() => history.goBack()}>
         <ChevronLeftIcon /> Voltar
       </Back>
       <Head>

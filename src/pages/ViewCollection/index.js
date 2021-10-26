@@ -15,17 +15,20 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import { useHistory } from "react-router-dom";
 
 function ViewCollection() {
+  const history = useHistory();
+
   return (
     <Container>
-      <Back to="/collections">
+      <Back onClick={() => history.goBack()}>
         <ChevronLeftIcon /> Voltar
       </Back>
       <Head>
         <h1>Coleção</h1>
         <p>Insira a descrição aqui</p>
-        <EditButton>
+        <EditButton to="/collections/1/edit">
           <EditIcon /> Editar Coleção
         </EditButton>
       </Head>
@@ -42,7 +45,7 @@ function ViewCollection() {
           </div>
           <p>Novo Cartão</p>
         </NewCard>
-        <Card to="/cards/1" color={"#B8E8FD"}>
+        <Card to="/cards/1/edit" color={"#B8E8FD"}>
           <div className="front">Velocidade Média</div>
           <div className="back">Vm = ΔS / Δt</div>
         </Card>
