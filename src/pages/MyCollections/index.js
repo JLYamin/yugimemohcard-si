@@ -66,6 +66,7 @@ function MyCollections() {
         {filteredCollections?.map((c) => (
           <Collection
             to={`/collections/${c.id}`}
+            key={c.id}
             color={c?.value.corColecao ?? "#ef818e"}
           >
             <div className="front">

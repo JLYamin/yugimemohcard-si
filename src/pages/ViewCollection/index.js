@@ -67,6 +67,7 @@ function ViewCollection() {
         </NewCard>
         {cards?.map((c) => (
           <Card
+            key={c.id}
             to={`/collections/${id}/cards/${c.id}/edit`}
             color={collection?.corColecao}
           >
