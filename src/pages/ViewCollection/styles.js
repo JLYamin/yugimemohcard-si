@@ -140,6 +140,7 @@ export const Card = styled(Link)`
     border: 2px solid #777085;
     background-color: ${({ color }) => color};
 
+    word-break: break-all;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,6 +159,7 @@ export const Card = styled(Link)`
     height: 9.5rem;
 
     border-radius: 0.5rem;
+    word-break: break-all;
 
     background-color: ${({ color }) => lighten(0.05, color)};
 

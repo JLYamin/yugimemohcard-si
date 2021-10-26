@@ -123,6 +123,7 @@ export const Collection = styled(Link)`
     border-radius: 0.5rem;
 
     border: 2px solid #777085;
+    word-break: break-all;
     background-color: ${({ color }) => color};
 
     display: flex;
@@ -146,6 +147,7 @@ export const Collection = styled(Link)`
     width: 7.25rem;
     height: 9.5rem;
     top: 0;
+    word-break: break-all;
     left: 0.75rem;
     border-radius: 0.5rem;
 

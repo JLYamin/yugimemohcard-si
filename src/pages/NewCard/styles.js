@@ -140,6 +140,7 @@ export const Card = styled.div`
     border: 2px solid #777085;
     background-color: ${({ color }) => color};
 
+    word-break: break-all;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,6 +161,7 @@ export const Card = styled.div`
     border-radius: 0.5rem;
 
     background-color: ${({ color }) => lighten(0.05, color)};
+    word-break: break-all;
 
     border: 2px solid #777085;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.26);

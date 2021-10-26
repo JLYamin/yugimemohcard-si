@@ -143,6 +143,7 @@ export const Card = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    word-break: break-all;
 
     z-index: 1;
 
@@ -156,6 +157,7 @@ export const Card = styled.div`
   .back {
     width: calc(7.25rem * 1.25);
     height: calc(9.5rem * 1.25);
+    word-break: break-all;
 
     border-radius: 0.5rem;
 

@@ -128,6 +128,7 @@ export const Collection = styled.div`
 
     display: flex;
     align-items: center;
+    word-break: break-all;
     justify-content: center;
 
     position: relative;
@@ -147,6 +148,7 @@ export const Collection = styled.div`
     width: calc(7.25rem * 1.25);
     height: calc(9.5rem * 1.25);
     top: 0;
+    word-break: break-all;
     left: calc(0.75rem * 1.25);
     border-radius: 0.5rem;
 

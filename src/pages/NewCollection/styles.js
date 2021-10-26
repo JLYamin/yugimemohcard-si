@@ -127,6 +127,7 @@ export const Collection = styled.div`
     background-color: ${({ color }) => color};
 
     display: flex;
+    word-break: break-all;
     align-items: center;
     justify-content: center;
 
@@ -146,6 +147,7 @@ export const Collection = styled.div`
     position: absolute;
     width: calc(7.25rem * 1.25);
     height: calc(9.5rem * 1.25);
+    word-break: break-all;
     top: 0;
     left: calc(0.75rem * 1.25);
     border-radius: 0.5rem;
