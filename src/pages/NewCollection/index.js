@@ -21,7 +21,7 @@ import {
   successNotification,
 } from "../../utils/notification";
 
-function NewCollection({}) {
+function NewCollection() {
   const [nomeColecao, setNomeColecao] = useState("");
   const [categoriaColecao, setCategoriaColecao] = useState("");
   const [descricaoColecao, setDescricaoColecao] = useState("");

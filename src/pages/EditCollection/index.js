@@ -21,7 +21,7 @@ import {
   successNotification,
 } from "../../utils/notification";
 
-function EditCollection({}) {
+function EditCollection() {
   const { id } = useParams();
 
   const [nomeColecao, setNomeColecao] = useState("");
@@ -40,7 +40,7 @@ function EditCollection({}) {
         setCorColecao(res.corColecao);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
