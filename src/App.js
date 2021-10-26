@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import MyCollections from "./pages/MyCollections";
 import NewCollection from "./pages/NewCollection";
 import ViewCollection from "./pages/ViewCollection";
@@ -22,6 +25,7 @@ function App() {
           <Route path="/collections" component={MyCollections} />
           <Route exact path="/" render={() => <Redirect to="/collections" />} />
         </Switch>
+        <ToastContainer limit={3} />
       </BrowserRouter>
     </main>
   );
