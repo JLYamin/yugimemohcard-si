@@ -69,7 +69,7 @@ function ViewCollection() {
           <Card
             key={c.id}
             to={`/collections/${id}/cards/${c.id}/edit`}
-            color={collection?.corColecao}
+            color={collection?.corColecao ?? "#fff"}
           >
             <div className="front">{c?.value?.front}</div>
             <div className="back">{c?.value?.back}</div>

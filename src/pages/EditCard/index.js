@@ -86,7 +86,7 @@ function EditCard() {
         <Button>Salvar</Button>
       </form>
       <aside>
-        <Card color={color}>
+        <Card color={color ?? "#fff"}>
           <p>Frente</p>
           <p>Verso</p>
           <div className="front">{front ? front : <i>Pergunta</i>}</div>
