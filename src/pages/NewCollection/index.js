@@ -9,18 +9,24 @@ import {
   Button,
   Collection,
   EmojiPicker,
+  Color,
 } from "./styles";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Twemoji from "react-twemoji";
 import Select from "react-select";
 import { useHistory } from "react-router-dom";
+import {
+  errorNotification,
+  successNotification,
+} from "../../utils/notification";
 
 function NewCollection({}) {
   const [nomeColecao, setNomeColecao] = useState("");
   const [categoriaColecao, setCategoriaColecao] = useState("");
   const [descricaoColecao, setDescricaoColecao] = useState("");
-  const [emojiColecao, setEmojiColecao] = useState("");
+  const [emojiColecao, setEmojiColecao] = useState("🎨");
+  const [corColecao, setCorColecao] = useState("#fff");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -33,11 +39,21 @@ function NewCollection({}) {
       categoriaColecao: categoriaColecao,
       descricaoColecao: descricaoColecao,
       emojiColecao: emojiColecao,
+      corColecao: corColecao,
     })
       .then((res) => {
         console.log(res);
+        successNotification("Coleção criada com sucesso!");
+        setNomeColecao("");
+        setCategoriaColecao("");
+        setDescricaoColecao("");
+        setEmojiColecao("🎨");
+        setCorColecao("#fff");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        errorNotification("Opa! Ocorreu um erro.");
+        console.log(err);
+      });
   };
 
   const emojiOptions = [
@@ -55,6 +71,17 @@ function NewCollection({}) {
     { label: "🖊", value: "🖊" },
     { label: "⚗️", value: "⚗️" },
     { label: "😁", value: "😁" },
+  ];
+
+  const colorOptions = [
+    { label: <Color color="#ef818e"></Color>, value: "#ef818e" },
+    { label: <Color color="#cdeac0"></Color>, value: "#cdeac0" },
+    { label: <Color color="#d5aaff"></Color>, value: "#d5aaff" },
+    { label: <Color color="#98a2cc"></Color>, value: "#98a2cc" },
+    { label: <Color color="#81cdff"></Color>, value: "#81cdff" },
+    { label: <Color color="#ffd96f"></Color>, value: "#ffd96f" },
+    { label: <Color color="#d07363"></Color>, value: "#d07363" },
+    { label: <Color color="#fae5d7"></Color>, value: "#fae5d7" },
   ];
 
   const history = useHistory();
@@ -113,17 +140,26 @@ function NewCollection({}) {
       </form>
       <aside>
         <p>Prévia</p>
-        <Collection color={"#B8E8FD"}>
+        <Collection color={corColecao ?? "#fff"}>
           <div className="front">
-            <Twemoji>🏀</Twemoji>
+            <Twemoji>{emojiColecao}</Twemoji>
           </div>
           <div className="back"></div>
         </Collection>
         <EmojiPicker>
           <p>Emoji da Capa:</p>
           <Select
+            menuPlacement="top"
             options={emojiOptions}
             onChange={(e) => setEmojiColecao(e.value)}
+          />
+        </EmojiPicker>
+        <EmojiPicker>
+          <p>Cor da Capa:</p>
+          <Select
+            menuPlacement="top"
+            options={colorOptions}
+            onChange={(e) => setCorColecao(e.value)}
           />
         </EmojiPicker>
       </aside>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -8,16 +8,61 @@ import {
   Button,
   Collection,
   EmojiPicker,
+  Color,
 } from "./styles";
 
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Twemoji from "react-twemoji";
 import Select from "react-select";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { showCollection, updateCollection } from "../../services/DataStorage";
+import {
+  errorNotification,
+  successNotification,
+} from "../../utils/notification";
 
 function EditCollection({}) {
+  const { id } = useParams();
+
+  const [nomeColecao, setNomeColecao] = useState("");
+  const [categoriaColecao, setCategoriaColecao] = useState("");
+  const [descricaoColecao, setDescricaoColecao] = useState("");
+  const [emojiColecao, setEmojiColecao] = useState("🎨");
+  const [corColecao, setCorColecao] = useState("#fff");
+
+  useEffect(() => {
+    showCollection(id)
+      .then((res) => {
+        setNomeColecao(res.name);
+        setCategoriaColecao(res.categoriaColecao);
+        setDescricaoColecao(res.descricaoColecao);
+        setEmojiColecao(res.emojiColecao);
+        setCorColecao(res.corColecao);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    update();
+  };
+
+  const update = () => {
+    updateCollection(id, {
+      name: nomeColecao,
+      categoriaColecao: categoriaColecao,
+      descricaoColecao: descricaoColecao,
+      emojiColecao: emojiColecao,
+      corColecao: corColecao,
+    })
+      .then((res) => {
+        console.log(res);
+        successNotification("Coleção atualizada com sucesso!");
+      })
+      .catch((err) => {
+        errorNotification("Opa! Ocorreu um erro.");
+        console.log(err);
+      });
   };
 
   const emojiOptions = [
@@ -37,6 +82,17 @@ function EditCollection({}) {
     { label: "😁", value: "😁" },
   ];
 
+  const colorOptions = [
+    { label: <Color color="#ef818e"></Color>, value: "#ef818e" },
+    { label: <Color color="#cdeac0"></Color>, value: "#cdeac0" },
+    { label: <Color color="#d5aaff"></Color>, value: "#d5aaff" },
+    { label: <Color color="#98a2cc"></Color>, value: "#98a2cc" },
+    { label: <Color color="#81cdff"></Color>, value: "#81cdff" },
+    { label: <Color color="#ffd96f"></Color>, value: "#ffd96f" },
+    { label: <Color color="#d07363"></Color>, value: "#d07363" },
+    { label: <Color color="#fae5d7"></Color>, value: "#fae5d7" },
+  ];
+
   const history = useHistory();
 
   return (
@@ -50,48 +106,70 @@ function EditCollection({}) {
       <form onSubmit={handleSubmit}>
         <FormInput>
           <label>Nome da Coleção</label>
-          <input type="text" />
+          <input
+            type="text"
+            value={nomeColecao}
+            onChange={(e) => setNomeColecao(e.target.value)}
+          />
         </FormInput>
         <FormInput>
           <label>Categoria</label>
-          <select>
-            <option selected disabled>
+          <select
+            value={categoriaColecao}
+            onChange={(e) => setCategoriaColecao(e.target.value)}
+          >
+            <option disabled value="">
               Selecione uma opção...
             </option>
-            <option>Artes Visuais</option>
-            <option>Atualidades</option>
-            <option>Espanhol</option>
-            <option>Filosofia</option>
-            <option>Física</option>
-            <option>Geografia</option>
-            <option>Gramática</option>
-            <option>História</option>
-            <option>Inglês</option>
-            <option>Matemática</option>
-            <option>Música</option>
-            <option>Química</option>
-            <option>Outro</option>
+            <option value="Artes Visuais">Artes Visuais</option>
+            <option value="Atualidades">Atualidades</option>
+            <option value="Espanhol">Espanhol</option>
+            <option value="Filosofia">Filosofia</option>
+            <option value="Física">Física</option>
+            <option value="Geografia">Geografia</option>
+            <option value="Gramática">Gramática</option>
+            <option value="História">História</option>
+            <option value="Inglês">Inglês</option>
+            <option value="Matemática">Matemática</option>
+            <option value="Música">Música</option>
+            <option value="Química">Química</option>
+            <option value="Outro">Outro</option>
           </select>
         </FormInput>
         <FormInput>
           <label>
             Descrição <span>(opcional)</span>
           </label>
-          <textarea />
+          <textarea
+            value={descricaoColecao}
+            onChange={(e) => setDescricaoColecao(e.target.value)}
+          />
         </FormInput>
         <Button>Salvar</Button>
       </form>
       <aside>
         <p>Prévia</p>
-        <Collection color={"#B8E8FD"}>
+        <Collection color={corColecao ?? "#fff"}>
           <div className="front">
-            <Twemoji>🏀</Twemoji>
+            <Twemoji>{emojiColecao}</Twemoji>
           </div>
           <div className="back"></div>
         </Collection>
         <EmojiPicker>
           <p>Emoji da Capa:</p>
-          <Select options={emojiOptions} />
+          <Select
+            menuPlacement="top"
+            options={emojiOptions}
+            onChange={(e) => setEmojiColecao(e.value)}
+          />
+        </EmojiPicker>
+        <EmojiPicker>
+          <p>Cor da Capa:</p>
+          <Select
+            menuPlacement="top"
+            options={colorOptions}
+            onChange={(e) => setCorColecao(e.value)}
+          />
         </EmojiPicker>
       </aside>
     </Container>

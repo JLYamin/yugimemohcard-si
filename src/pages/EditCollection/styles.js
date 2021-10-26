@@ -163,3 +163,10 @@ export const EmojiPicker = styled.div`
   display: grid;
   gap: 0.25rem;
 `;
+
+export const Color = styled.div`
+  width: 1rem;
+  height: 1rem;
+  background-color: ${({ color }) => color};
+  border-radius: 2rem;
+`;

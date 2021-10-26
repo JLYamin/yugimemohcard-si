@@ -151,7 +151,7 @@ export const Collection = styled.div`
     left: calc(0.75rem * 1.25);
     border-radius: 0.5rem;
 
-    background-color: ${({ color }) => darken(0.05, desaturate(0.5, color))};
+    background-color: ${({ color }) => darken(0.05, desaturate(0.25, color))};
 
     border: 2px solid #777085;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.26);
@@ -162,4 +162,11 @@ export const EmojiPicker = styled.div`
   margin-top: 0.25rem;
   display: grid;
   gap: 0.25rem;
+`;
+
+export const Color = styled.div`
+  width: 1rem;
+  height: 1rem;
+  background-color: ${({ color }) => color};
+  border-radius: 2rem;
 `;

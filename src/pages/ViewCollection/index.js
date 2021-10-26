@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Container,
@@ -15,10 +15,30 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { indexCard, showCollection } from "../../services/DataStorage";
 
 function ViewCollection() {
   const history = useHistory();
+  const { id } = useParams();
+
+  const [cards, setCards] = useState([]);
+  const [collection, setCollection] = useState({});
+
+  useEffect(() => {
+    showCollection(id)
+      .then((res) => {
+        setCollection(res);
+      })
+      .catch((err) => console.log(err));
+
+    indexCard(id)
+      .then((res) => {
+        setCards(res);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Container>
@@ -26,14 +46,14 @@ function ViewCollection() {
         <ChevronLeftIcon /> Voltar
       </Back>
       <Head>
-        <h1>Coleção</h1>
-        <p>Insira a descrição aqui</p>
-        <EditButton to="/collections/1/edit">
+        <h1>{collection?.name}</h1>
+        <p>{collection?.descricaoColecao}</p>
+        <EditButton to={`/collections/${id}/edit`}>
           <EditIcon /> Editar Coleção
         </EditButton>
       </Head>
       <div className="actions">
-        <ReviewButton to="/collection/1/edit">
+        <ReviewButton to="/">
           <PlayCircleIcon />
           Revisar Coleção
         </ReviewButton>
@@ -45,10 +65,12 @@ function ViewCollection() {
           </div>
           <p>Novo Cartão</p>
         </NewCard>
-        <Card to="/cards/1/edit" color={"#B8E8FD"}>
-          <div className="front">Velocidade Média</div>
-          <div className="back">Vm = ΔS / Δt</div>
-        </Card>
+        {cards?.map((c) => (
+          <Card to={`/cards/${c.id}/edit`} color={"#B8E8FD"}>
+            <div className="front">Velocidade Média</div>
+            <div className="back">Vm = ΔS / Δt</div>
+          </Card>
+        ))}
       </CardsContainer>
     </Container>
   );

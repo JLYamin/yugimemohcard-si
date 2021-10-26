@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Container,
@@ -13,8 +13,20 @@ import {
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import AddIcon from "@mui/icons-material/Add";
 import Twemoji from "react-twemoji";
+import { indexCollection } from "../../services/DataStorage";
 
 function MyCollections() {
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    indexCollection()
+      .then((res) => {
+        setCollections(res);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Container>
       <Head>
@@ -36,14 +48,19 @@ function MyCollections() {
           </div>
           <p>Nova Coleção</p>
         </NewCollection>
-        <Collection to="/collections/1" color={"#B8E8FD"}>
-          <div className="front">
-            <Twemoji>🏀</Twemoji>
-          </div>
-          <div className="back"></div>
-          <p>Cinemática Pt 1</p>
-          <span>Raphael Akira</span>
-        </Collection>
+        {collections?.map((c) => (
+          <Collection
+            to={`/collections/${c.id}`}
+            color={c?.value.corColecao ?? "#ef818e"}
+          >
+            <div className="front">
+              <Twemoji>{c?.value.emojiColecao}</Twemoji>
+            </div>
+            <div className="back"></div>
+            <p>{c?.value.name}</p>
+            <span>Raphael Akira</span>
+          </Collection>
+        ))}
       </CollectionsContainer>
     </Container>
   );
