@@ -1,21 +1,21 @@
 import localForage from "localforage";
 
-var collectionsStore = localForage.createInstance({
+var collectionsStorage = localForage.createInstance({
   name: "Collections",
 });
 
-var cardsStore = localForage.createInstance({
-    name: "Cards",Card
+var cardsStorage = localForage.createInstance({
+    name: "Cards",
 });
 
 /** Collections **/
 /**
  * Get all items for Collections
  */
-const indexCollection = async () => {
+export const indexCollection = async () => {
     try {
         let collections = [];
-        await collectionsStore.iterate(function (value, key) {
+        await collectionsStorage.iterate(function (value, key) {
             collections.push({ id: key, value });
         });
         return collections;
@@ -28,12 +28,12 @@ const indexCollection = async () => {
 /**
  * Create object in Collections
  */
-const createCollection = async (data) => {
+export const createCollection = async (data) => {
     try {
-        const keys = await collectionsStore.keys();
+        const keys = await collectionsStorage.keys();
         const uniqueID = keys.length > 0 ? Number(keys[keys.length - 1]) + 1 : 1;
-        await collectionsStore.setItem(uniqueID, data);
-        return await collectionsStore.getItem(uniqueID);
+        await collectionsStorage.setItem(uniqueID, data);
+        return await collectionsStorage.getItem(uniqueID);
     }
     catch (err) {
         console.log(err);
@@ -43,7 +43,7 @@ const createCollection = async (data) => {
 /**
  * Update object in Collections by id
  */
-const updateCollection = async (id, data) => {
+export const updateCollection = async (id, data) => {
     try {
         const item = await collectionsStorage.getItem(id);
         await collectionsStorage.setItem(id, { ...item, ...data });
@@ -57,9 +57,9 @@ const updateCollection = async (id, data) => {
 /**
  * Get one object from Collections by id
  */
-const showCollection = async (id) => {
+export const showCollection = async (id) => {
     try {
-        const item = await collectionsStore.getItem(id);
+        const item = await collectionsStorage.getItem(id);
         return item;
     }
     catch (err) {
@@ -70,9 +70,9 @@ const showCollection = async (id) => {
 /**
  * Delete an object from Collections by id
  */
-const destroyCollection = async (id) => {
+export const destroyCollection = async (id) => {
     try {
-        await collectionsStore.removeItem(id);
+        await collectionsStorage.removeItem(id);
         return id;
     }
     catch (err) {
@@ -85,11 +85,11 @@ const destroyCollection = async (id) => {
 /**
  * Get all items from Cards
  */
-const indexCard = async (id) => {
+export const indexCard = async (id) => {
     try {
         let cards = [];
-        await cardsStore.iterate(function (value, key) {
-            if(value.collectionId === id){
+        await cardsStorage.iterate(function (value, key) {
+            if(value.collectionID === id){
                 cards.push({ id: key, value });
             }
         });
@@ -103,12 +103,12 @@ const indexCard = async (id) => {
 /**
  * Create object in Cards
  */
-const createCard = async (data) => {
+export const createCard = async (data) => {
     try {
-        const keys = await cardsStore.keys();
+        const keys = await cardsStorage.keys();
         const uniqueID = keys.length > 0 ? Number(keys[keys.length - 1]) + 1 : 1;
-        await cardsStore.setItem(uniqueID, data);
-        return await cardsStore.getItem(uniqueID);
+        await cardsStorage.setItem(uniqueID, data);
+        return await cardsStorage.getItem(uniqueID);
     }
     catch (err) {
         console.log(err);
@@ -118,7 +118,7 @@ const createCard = async (data) => {
 /**
  * Update object in Cards by id
  */
-const updateCard = async (id, data) => {
+export const updateCard = async (id, data) => {
     try {
         const item = await cardsStorage.getItem(id);
         await cardsStorage.setItem(id, { ...item, ...data });
@@ -132,9 +132,9 @@ const updateCard = async (id, data) => {
 /**
  * Get one object from Cards by id
  */
-const showCard = async (id) => {
+export const showCard = async (id) => {
     try {
-        const item = await cardsStore.getItem(id);
+        const item = await cardsStorage.getItem(id);
         return item;
     }
     catch (err) {
@@ -145,9 +145,9 @@ const showCard = async (id) => {
 /**
  * Delete an object from Cards by id
  */
-const destroyCard = async (id) => {
+export const destroyCard = async (id) => {
     try {
-        await cardsStore.removeItem(id);
+        await cardsStorage.removeItem(id);
         return id;
     }
     catch (err) {
@@ -155,6 +155,3 @@ const destroyCard = async (id) => {
     }
 };
 /** END Cards **/
-
-export { indexCollection, showCollection, createCollection, updateCollection, destroyCollection, 
-    indexCard, showCard, createCard, updateCard, destroyCard };
