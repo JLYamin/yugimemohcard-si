@@ -15,9 +15,7 @@ import Twemoji from "react-twemoji";
 import Select from "react-select";
 import { useHistory } from "react-router-dom";
 
-function NewCollection({}) {
-  const [nomeColecao, setNomeColecao] = useState("");
-
+function EditCollection({}) {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -47,7 +45,7 @@ function NewCollection({}) {
         <ChevronLeftIcon /> Voltar
       </Back>
       <Head>
-        <h1>Nova Coleção</h1>
+        <h1>Editar Coleção</h1>
       </Head>
       <form onSubmit={handleSubmit}>
         <FormInput>
@@ -100,4 +98,4 @@ function NewCollection({}) {
   );
 }
 
-export default NewCollection;
+export default EditCollection;

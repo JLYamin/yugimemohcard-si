@@ -14,7 +14,7 @@ export const Container = styled.section`
   }
 `;
 
-export const Back = styled(Link)`
+export const Back = styled.div`
   display: grid;
   grid-template-columns: repeat(2, min-content);
   align-items: center;
@@ -114,14 +114,14 @@ export const NewCard = styled(Link)`
   }
 `;
 
-export const Card = styled.div`
+export const Card = styled(Link)`
   display: grid;
   grid-template-rows: repeat(3, min-content);
   grid-template-columns: min-content min-content;
   gap: 0 0.75rem;
   align-items: center;
   justify-items: center;
-
+  color: #444345;
   cursor: pointer;
 
   div {
