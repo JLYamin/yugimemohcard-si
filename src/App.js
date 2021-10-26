@@ -17,8 +17,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route path="/cards/new" component={NewCard} />
-          <Route path="/cards/:id/edit" component={EditCard} />
+          <Route path="/collections/:id/cards/new" component={NewCard} />
+          <Route path="/collections/:id/cards/:idc/edit" component={EditCard} />
           <Route path="/collections/new" component={NewCollection} />
           <Route path="/collections/:id/edit" component={EditCollection} />
           <Route path="/collections/:id" component={ViewCollection} />

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { lighten } from "polished";
 
 export const Container = styled.div`
@@ -123,14 +122,14 @@ export const Card = styled.div`
   align-items: center;
   justify-items: center;
 
-  cursor: pointer;
-
   div {
     display: grid;
     align-items: center;
     justify-items: center;
 
     text-align: center;
+
+    color: #4e4e4e;
   }
 
   .front {

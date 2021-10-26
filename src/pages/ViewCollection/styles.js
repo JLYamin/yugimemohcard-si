@@ -78,7 +78,7 @@ export const CardsContainer = styled.div`
   padding: 0 1rem 1rem;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, 8rem);
+  grid-template-columns: repeat(auto-fill, 15rem);
   gap: 3rem;
 `;
 

@@ -17,6 +17,8 @@ import { indexCollection } from "../../services/DataStorage";
 
 function MyCollections() {
   const [collections, setCollections] = useState([]);
+  const [filteredCollections, setFilteredCollections] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     indexCollection()
@@ -27,12 +29,25 @@ function MyCollections() {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    if (collections.length > 0) {
+      setFilteredCollections(
+        collections.filter((c) =>
+          c?.value?.name?.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
+  }, [collections, search]);
   return (
     <Container>
       <Head>
         <h1>Minhas Coleções</h1>
         <SearchInput>
-          <input placeholder="Buscar..." />
+          <input
+            placeholder="Buscar..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </SearchInput>
       </Head>
       <div className="actions">
@@ -48,7 +63,7 @@ function MyCollections() {
           </div>
           <p>Nova Coleção</p>
         </NewCollection>
-        {collections?.map((c) => (
+        {filteredCollections?.map((c) => (
           <Collection
             to={`/collections/${c.id}`}
             color={c?.value.corColecao ?? "#ef818e"}

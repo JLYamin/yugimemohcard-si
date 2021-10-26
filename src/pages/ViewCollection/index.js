@@ -38,7 +38,7 @@ function ViewCollection() {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   return (
     <Container>
@@ -59,16 +59,19 @@ function ViewCollection() {
         </ReviewButton>
       </div>
       <CardsContainer>
-        <NewCard to="/cards/new">
+        <NewCard to={`/collections/${id}/cards/new`}>
           <div>
             <AddIcon />
           </div>
           <p>Novo Cartão</p>
         </NewCard>
         {cards?.map((c) => (
-          <Card to={`/cards/${c.id}/edit`} color={"#B8E8FD"}>
-            <div className="front">Velocidade Média</div>
-            <div className="back">Vm = ΔS / Δt</div>
+          <Card
+            to={`/collections/${id}/cards/${c.id}/edit`}
+            color={collection?.corColecao}
+          >
+            <div className="front">{c?.value?.front}</div>
+            <div className="back">{c?.value?.back}</div>
           </Card>
         ))}
       </CardsContainer>
